@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Extracción de Habilidades</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Extracción de Habilidades</h1>
+        <form method="post">
+            <label for="texto">Ingrese su texto:</label>
+            <textarea id="texto" name="texto" rows="4" cols="50">{{ texto }}</textarea>
+            <br>
+            <input type="submit" value="Analizar">
+        </form>
+
+        {% if mensaje_error %}
+            <div class="error">{{ mensaje_error }}</div>
+        {% endif %}
+
+        {% if texto %}
+            <h2>Texto Original</h2>
+            <p>{{ texto }}</p>
+        {% endif %}
+
+        {% if texto_corregido %}
+            <h2>Texto Corregido</h2>
+            <p>{{ texto_corregido }}</p>
+        {% endif %}
+
+        {% if habilidades %}
+            <h2>Habilidades Extraídas</h2>
+            <ul>
+                {% for habilidad in habilidades %}
+                    <li>{{ habilidad }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detección de Groserías</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Detección de Groserías</h1>
+        <form method="post">
+            <label for="texto">Ingrese su texto:</label>
+            <textarea id="texto" name="texto" rows="4" cols="50">{{ texto }}</textarea>
+            <br>
+            <input type="submit" value="Analizar">
+        </form>
+
+        {% if mensaje_error %}
+            <div class="error">{{ mensaje_error }}</div>
+        {% endif %}
+
+        {% if texto %}
+            <h2>Texto Original</h2>
+            <p>{{ texto }}</p>
+        {% endif %}
+
+        {% if texto_corregido %}
+            <h2>Texto Corregido</h2>
+            <p>{{ texto_corregido }}</p>
+        {% endif %}
+
+        {% if contiene_groserias is not none %}
+            <h2>Contiene groserías: {{ contiene_groserias }}</h2>
+            {% if contiene_groserias %}
+                <h2>Groserías Detectadas</h2>
+                <ul>
+                    {% for groseria in groserias_detectadas %}
+                        <li>{{ groseria }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h2>No se detectaron groserías.</h2>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
